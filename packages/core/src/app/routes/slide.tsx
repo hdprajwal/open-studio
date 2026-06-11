@@ -1006,6 +1006,7 @@ function InlineTitleEditor({
               if (!saving) commit();
             }}
             onKeyDown={(e) => {
+              if (e.nativeEvent.isComposing) return;
               if (e.key === 'Enter') {
                 e.preventDefault();
                 commit();
