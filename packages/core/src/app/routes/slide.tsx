@@ -429,12 +429,15 @@ export function Slide() {
       await exportSlideAsPng(slide, slideId, (p) => {
         toast.custom(() => <PngProgressToast progress={p} />, { id: toastId, duration: Infinity });
       });
+      toast.dismiss(toastId);
     } catch (err) {
       console.error('[open-slide] png export failed', err);
-      toast.error(t.slide.pngExportFailed, { id: toastId, duration: 4000 });
+      // The error toast must not reuse toastId: sonner keeps rendering a custom
+      // toast's JSX when updated by id, so the error text would never paint.
+      toast.dismiss(toastId);
+      toast.error(t.slide.pngExportFailed, { duration: 4000 });
     } finally {
       setExporting(false);
-      toast.dismiss(toastId);
     }
   };
 
