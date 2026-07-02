@@ -7,6 +7,7 @@ import {
   FileCode2,
   FileImage,
   FileText,
+  Image,
   Link2,
   Loader2,
   Maximize,
@@ -53,12 +54,14 @@ import { NotesDrawer } from '../components/notes-drawer';
 import { OverviewGrid } from '../components/overview-grid';
 import { PdfProgressToast } from '../components/pdf-progress-toast';
 import { openPresenterWindow, Player } from '../components/player';
+import { PngProgressToast } from '../components/png-progress-toast';
 import { PptxProgressToast } from '../components/pptx-progress-toast';
 import { SlideCanvas } from '../components/slide-canvas';
 import { SlideTransitionLayer } from '../components/slide-transition-layer';
 import { type ThumbnailActions, ThumbnailRail } from '../components/thumbnail-rail';
 import { exportSlideAsHtml } from '../lib/export-html';
 import { exportSlideAsPdf, isSafari } from '../lib/export-pdf';
+import { exportSlideAsPng } from '../lib/export-png';
 import { exportSlideAsImagePptx } from '../lib/export-pptx';
 import { type CanvasSize, FORMAT_PRESETS, resolveCanvas } from '../lib/formats';
 import { remapNotesSessionCacheAfterReorder } from '../lib/inspector/use-notes';
@@ -410,6 +413,31 @@ export function Slide() {
     }
   };
 
+  const exportPng = async () => {
+    if (!slide || exporting) return;
+    setExporting(true);
+    const toastId = `png-export-${slideId}`;
+    toast.custom(
+      () => (
+        <PngProgressToast
+          progress={{ phase: 'processing', current: 0, total: pages.length, percent: 0 }}
+        />
+      ),
+      { id: toastId, duration: Infinity },
+    );
+    try {
+      await exportSlideAsPng(slide, slideId, (p) => {
+        toast.custom(() => <PngProgressToast progress={p} />, { id: toastId, duration: Infinity });
+      });
+    } catch (err) {
+      console.error('[open-slide] png export failed', err);
+      toast.error(t.slide.pngExportFailed, { id: toastId, duration: 4000 });
+    } finally {
+      setExporting(false);
+      toast.dismiss(toastId);
+    }
+  };
+
   const exportPdf = async () => {
     if (!slide || exporting) return;
     if (isSafari()) {
@@ -469,6 +497,10 @@ export function Slide() {
       <DropdownMenuItem disabled={exporting} onSelect={exportHtml}>
         <FileCode2 />
         {t.slide.exportAsHtml}
+      </DropdownMenuItem>
+      <DropdownMenuItem disabled={exporting} onSelect={exportPng}>
+        <Image />
+        {t.slide.exportAsPng}
       </DropdownMenuItem>
       <DropdownMenuItem disabled={exporting} onSelect={exportPdf}>
         <FileText />
