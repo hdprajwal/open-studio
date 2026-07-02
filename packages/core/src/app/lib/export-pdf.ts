@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { designToCssVars } from './design';
-import type { CanvasSize } from './formats';
+import { type CanvasSize, resolveCanvas } from './formats';
 import { SlidePageProvider } from './page-context';
 import { isFrameAnimationSettled, waitForDataWaitfor, waitForFonts } from './print-ready';
 import type { SlideModule } from './sdk';
@@ -110,10 +110,11 @@ export async function exportSlideAsPdf(
   if (pages.length === 0) return;
 
   const total = pages.length;
+  const canvas = resolveCanvas(slide.meta, slideId);
 
   const style = document.createElement('style');
   style.id = PRINT_STYLE_ID;
-  style.textContent = buildPrintStyles({ width: 1920, height: 1080 });
+  style.textContent = buildPrintStyles(canvas);
   document.head.appendChild(style);
 
   const root = document.createElement('div');
@@ -133,15 +134,15 @@ export async function exportSlideAsPdf(
     const host = document.createElement('div');
     host.className = 'os-print-frame';
     host.setAttribute('data-osd-canvas', '');
-    host.style.width = '1920px';
-    host.style.height = '1080px';
+    host.style.width = `${canvas.width}px`;
+    host.style.height = `${canvas.height}px`;
     if (designVars) {
       for (const [k, v] of Object.entries(designVars)) host.style.setProperty(k, v);
     }
     const inner = document.createElement('div');
     inner.className = 'os-print-supersample';
-    inner.style.width = '1920px';
-    inner.style.height = '1080px';
+    inner.style.width = `${canvas.width}px`;
+    inner.style.height = `${canvas.height}px`;
     host.appendChild(inner);
     root.appendChild(host);
     frames.push(host);
