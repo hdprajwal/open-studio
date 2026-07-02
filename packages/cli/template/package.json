@@ -4,13 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "open-slide dev",
-    "build": "open-slide build",
-    "preview": "open-slide preview",
-    "sync:skills": "open-slide sync:skills"
+    "dev": "open-studio dev",
+    "build": "open-studio build",
+    "preview": "open-studio preview",
+    "sync:skills": "open-studio sync:skills"
   },
   "dependencies": {
-    "@open-slide/core": "^0.0.6",
+    "@open-studio/core": "^0.0.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

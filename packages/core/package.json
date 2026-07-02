@@ -1,7 +1,7 @@
 {
-  "name": "@open-slide/core",
+  "name": "@open-studio/core",
   "version": "1.13.2",
-  "description": "Runtime and CLI for open-slide — write slides in slides/, we handle the rest.",
+  "description": "Runtime and CLI for open-studio — write slides in slides/, we handle the rest.",
   "type": "module",
   "exports": {
     ".": {
@@ -21,7 +21,7 @@
     }
   },
   "bin": {
-    "open-slide": "./bin.js"
+    "open-studio": "./bin.js"
   },
   "files": [
     "bin.js",
@@ -48,17 +48,17 @@
   ],
   "license": "MIT",
   "author": {
-    "name": "1weiho",
-    "url": "https://github.com/1weiho"
+    "name": "HD Prajwal",
+    "url": "https://github.com/hdprajwal"
   },
-  "homepage": "https://open-slide.dev",
+  "homepage": "https://github.com/hdprajwal/open-studio",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/1weiho/open-slide.git",
+    "url": "git+https://github.com/hdprajwal/open-studio.git",
     "directory": "packages/core"
   },
   "bugs": {
-    "url": "https://github.com/1weiho/open-slide/issues"
+    "url": "https://github.com/hdprajwal/open-studio/issues"
   },
   "publishConfig": {
     "access": "public"

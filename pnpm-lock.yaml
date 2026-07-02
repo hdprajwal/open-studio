@@ -26,7 +26,7 @@ importers:
 
   apps/demo:
     dependencies:
-      '@open-slide/core':
+      '@open-studio/core':
         specifier: workspace:*
         version: link:../../packages/core
       react:

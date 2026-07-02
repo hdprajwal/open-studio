@@ -1,10 +1,10 @@
 {
-  "name": "@open-slide/cli",
+  "name": "@open-studio/cli",
   "version": "1.3.2",
-  "description": "Scaffold an open-slide workspace with Claude Code skills preconfigured.",
+  "description": "Scaffold an open-studio workspace with Claude Code skills preconfigured.",
   "type": "module",
   "bin": {
-    "open-slide": "dist/cli.js"
+    "open-studio": "dist/cli.js"
   },
   "files": [
     "dist",
@@ -28,17 +28,17 @@
   ],
   "license": "MIT",
   "author": {
-    "name": "1weiho",
-    "url": "https://github.com/1weiho"
+    "name": "HD Prajwal",
+    "url": "https://github.com/hdprajwal"
   },
-  "homepage": "https://open-slide.dev",
+  "homepage": "https://github.com/hdprajwal/open-studio",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/1weiho/open-slide.git",
+    "url": "git+https://github.com/hdprajwal/open-studio.git",
     "directory": "packages/cli"
   },
   "bugs": {
-    "url": "https://github.com/1weiho/open-slide/issues"
+    "url": "https://github.com/hdprajwal/open-studio/issues"
   },
   "publishConfig": {
     "access": "public"

@@ -1,4 +1,4 @@
-import buildManifest from 'virtual:open-slide/folders';
+import buildManifest from 'virtual:open-studio/folders';
 import { useCallback, useEffect, useState } from 'react';
 import type { Folder, FolderIcon, FoldersManifest } from './sdk';
 
@@ -142,9 +142,9 @@ export function useFolders(): UseFoldersResult {
     const handler = () => {
       refresh().catch(() => {});
     };
-    import.meta.hot.on('open-slide:files-changed', handler);
+    import.meta.hot.on('open-studio:files-changed', handler);
     return () => {
-      import.meta.hot?.off('open-slide:files-changed', handler);
+      import.meta.hot?.off('open-studio:files-changed', handler);
     };
   }, [refresh]);
 
