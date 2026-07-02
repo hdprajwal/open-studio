@@ -1,75 +1,74 @@
-<img width="1280" height="640" alt="open-slide github cover" src="https://github.com/user-attachments/assets/02f5e6d7-12a7-4a8e-88e7-ae8770a96584" />
+# open-studio
 
-<br />
-<br />
-<a href="https://vercel.com/open-source-program">
-  <img alt="Vercel OSS Program" src="https://vercel.com/oss/program-badge-2026.svg" />
-</a>
+A studio for making slides, LinkedIn carousels, story graphics, YouTube thumbnails, OG images, and X post images with React and a coding agent. You describe what you want in plain language. Your agent writes the pages. open-studio handles the canvas, scaling, navigation, hot reload, present mode, and exports.
 
-# open-slide
+## What it is
 
-[![GitHub stars](https://img.shields.io/github/stars/1weiho/open-slide?style=for-the-badge)](https://github.com/1weiho/open-slide/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/1weiho/open-slide?style=for-the-badge)](https://github.com/1weiho/open-slide/network/members)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+open-studio started as a fork of [open-slide](https://github.com/1weiho/open-slide), a slide framework built for coding agents. open-slide renders every page into a fixed 1920 × 1080 canvas. open-studio generalizes that: each deck picks its own canvas format, so one workspace can hold talk slides, a LinkedIn carousel, an Instagram story, and a thumbnail side by side. Every page is a plain React component, not a constrained DSL.
 
-**The slide framework built for agents.** Describe your deck in natural language — your coding agent writes the React. open-slide handles the canvas, scaling, navigation, hot reload, and present mode so the agent can focus on content.
+## Formats
 
-Every slide renders into a fixed **1920 × 1080** canvas. Pages are arbitrary React components, not a constrained DSL.
+Set a format in the deck's meta and every page in that deck renders, previews, and exports at that size.
 
-```bash
-npx @open-slide/cli init my-slide
-```
+| Preset | Size | Use for |
+| --- | --- | --- |
+| `slide` | 1920 × 1080 | Talks and presentations (default) |
+| `carousel` | 1080 × 1080 | LinkedIn and Instagram carousels |
+| `portrait` | 1080 × 1350 | Portrait feed posts |
+| `story` | 1080 × 1920 | Instagram and WhatsApp stories |
+| `thumbnail` | 1280 × 720 | YouTube thumbnails |
+| `og` | 1200 × 630 | Open Graph and link preview images |
+| `x-post` | 1600 × 900 | X post images |
 
-## Why open-slide
-
-Slides are visual code. Agents are great at writing code. open-slide is the missing runtime that turns "make slides about X" into a polished, presentable deck — without you ever leaving the chat.
+If none of these fit, set a custom `canvas` with any width and height.
 
 ## Highlights
 
-### 🤖 Agent-native authoring
+### Agent authoring
 
-Works with any coding agent (Claude Code, Codex, Cursor, …). The scaffolder ships with built-in skills:
+Works with any coding agent (Claude Code, Codex, Cursor). The workspace ships with skills the agent reads before writing:
 
-- **`/create-slide`** — drafts a deck end-to-end. Asks four scoping questions (topic & aesthetic, page count, text density, motion vs. static), picks an id, plans the structure, and writes the pages.
-- **`/slide-authoring`** — the technical reference for the 1920 × 1080 canvas, type scale, palette, and layout rules. The agent reads this before writing.
+- `/create-slide` drafts a deck end to end. It asks a few scoping questions (topic, format, page count, text density, motion), plans the structure, and writes the pages.
+- `/slide-authoring` is the technical reference for the canvas, type scale, palette, and layout rules for each format.
 
-From a one-line prompt to a polished deck, no boilerplate.
+### In-browser inspector
 
-### 🎯 In-browser inspector
+Click any element in the dev server and attach a comment, like "make this red" or "shrink the headline". Comments are saved as `@slide-comment` markers in the source. Run `/apply-comments` and the agent applies every pending edit and clears the markers.
 
-Click any element in the dev server and attach a comment — *"make this red"*, *"change to 'Open Slide Rocks'"*, *"shrink the headline"*. Comments are persisted as `@slide-comment` markers in source. Run `/apply-comments` and the agent applies every pending edit, then clears the markers.
+### Assets manager with logo search
 
-The loop: present → click to comment → `/apply-comments` → repeat.
+Manage images, videos, and fonts per deck through a built-in assets panel. Search and drop in brand logos through the integrated [svgl](https://svgl.app/) catalogue.
 
-### 🖼️ Assets manager + svgl logo search
+### Present mode
 
-Manage images, videos, and fonts per deck through a built-in assets panel. Search and drop in any brand logo via the integrated [svgl](https://svgl.app/) catalogue — no more hunting for SVGs.
+Fullscreen playback with keyboard navigation, plus a presenter view with current and next slide, speaker notes, and a timer.
 
-### 🎬 Professional present mode
+### Exports
 
-Fullscreen playback with keyboard navigation, plus a **presenter mode** with current/next slide preview, speaker notes, and a timer. Built for the stage, not just the browser tab.
+Export a deck as a PDF, a PPTX, or PNG images, each sized to the deck's canvas format. You can also export a self-contained static HTML site.
 
-### 📦 Export to static HTML & PDF
+### Slide manager
 
-One command exports your deck as a self-contained static HTML site or a print-ready PDF. Share without a server.
+Organize decks into folders with custom emoji and drag and drop to reorder.
 
-### 📁 Slide manager
+### Deploy anywhere
 
-Organise decks into folders with custom emoji and drag-and-drop to reorder. Useful once you've built more than three decks and need to find anything.
-
-### 🚀 Deploy-friendly
-
-Outputs a plain static build — one-click deploy to Vercel, Cloudflare Pages, Zeabur, Netlify, or any static host. No server, no runtime, no lock-in.
+The build output is plain static files. Host it on Vercel, Cloudflare Pages, Netlify, or any static host. No server and no lock-in.
 
 ## Get started
 
+The packages are not published to npm under the open-studio name yet, so for now run it from the repo:
+
 ```bash
-npx @open-slide/cli init my-slide
-cd my-slide
+git clone https://github.com/hdprajwal/open-studio
+cd open-studio
+pnpm install
 pnpm dev
 ```
 
-The scaffolded workspace ships with agent skills preconfigured for Claude Code. From there you drive the deck through your agent — or edit `slides/<id>/index.tsx` directly. See [CLAUDE.md](CLAUDE.md) for the hard rules.
+`pnpm dev` runs the demo workspace in `apps/demo` against the local core. From there you drive decks through your agent, or edit `slides/<id>/index.tsx` directly.
+
+Note: the packages inside the repo are still named `@open-slide/core` and `@open-slide/cli`. A rename to `@open-studio/*` is planned.
 
 ## Repo layout
 
@@ -77,32 +76,26 @@ This repo is a pnpm + Turbo monorepo.
 
 | Path | Description |
 | --- | --- |
-| [packages/core](packages/core) | `@open-slide/core` — runtime (home page, slide viewer, present mode, inspector), Vite plugin, and the `open-slide` dev/build/preview CLI. |
-| [packages/cli](packages/cli) | `@open-slide/cli` — `npx @open-slide/cli init` scaffolder. Generates a minimal workspace where Vite/React/tsconfig stay hidden inside core. |
-| [apps/demo](apps/demo) | Example workspace that consumes `@open-slide/core` via `workspace:*`. Used for local development of the framework. |
+| [packages/core](packages/core) | `@open-slide/core`. The runtime (home page, slide viewer, present mode, inspector), the Vite plugin, and the dev/build/preview CLI. |
+| [packages/cli](packages/cli) | `@open-slide/cli`. The `init` scaffolder. It generates a minimal workspace where Vite, React, and tsconfig stay hidden inside core. |
+| [apps/demo](apps/demo) | Example workspace that consumes the local core. Used for developing the framework. |
+| [apps/web](apps/web) | Marketing site (Next.js). |
 
 ## Development
 
 ```bash
 pnpm install
-pnpm dev      # runs the demo against the local @open-slide/core
-pnpm build    # builds all packages
-pnpm check    # type-checks all packages
-pnpm lint     # lints via biome
+pnpm dev        # runs the demo against the local core
+pnpm build      # builds all packages
+pnpm typecheck  # type-checks all packages
+pnpm check      # formats and lints via biome
+pnpm test       # runs unit tests
 ```
-
-## Star history
-
-If open-slide is useful to you, please [star the repo on GitHub](https://github.com/1weiho/open-slide) — it helps other people find the project.
-
-[![Star History Chart](https://api.star-history.com/svg?repos=1weiho/open-slide&type=Date)](https://star-history.com/#1weiho/open-slide&Date)
-
-## Support
-
-If open-slide has been useful to you, consider supporting development:
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/D1D11YPUP1)
 
 ## License
 
 MIT
+
+## Credits
+
+open-studio is built on [open-slide](https://github.com/1weiho/open-slide) by [Yiwei Ho (1weiho)](https://github.com/1weiho). The runtime, the inspector, the present mode, and the agent-first authoring model all come from his work. This fork adds multi-format canvases and format-correct exports on top. If open-slide is useful to you, go star it and [support him on Ko-fi](https://ko-fi.com/D1D11YPUP1).
