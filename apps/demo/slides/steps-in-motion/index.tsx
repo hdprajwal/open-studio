@@ -6,7 +6,7 @@ import {
   Step,
   Steps,
   useSlidePageNumber,
-} from '@open-slide/core';
+} from '@open-studio/core';
 import type { CSSProperties, ReactNode } from 'react';
 
 export const design: DesignSystem = {

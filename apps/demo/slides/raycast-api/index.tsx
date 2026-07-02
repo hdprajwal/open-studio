@@ -1,4 +1,9 @@
-import { type DesignSystem, type Page, type SlideMeta, useSlidePageNumber } from '@open-slide/core';
+import {
+  type DesignSystem,
+  type Page,
+  type SlideMeta,
+  useSlidePageNumber,
+} from '@open-studio/core';
 import raycastIcon from './assets/raycast.svg';
 
 export const design: DesignSystem = {
