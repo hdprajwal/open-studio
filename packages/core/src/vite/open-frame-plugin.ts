@@ -3,21 +3,21 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import fg from 'fast-glob';
 import { loadConfigFromFile, normalizePath, type Plugin, type ViteDevServer } from 'vite';
-import type { OpenSlideConfig } from '../config.ts';
+import type { OpenFrameConfig } from '../config.ts';
 
-export type { OpenSlideConfig };
+export type { OpenFrameConfig };
 
-export type OpenSlidePluginOptions = {
+export type OpenFramePluginOptions = {
   userCwd: string;
-  config: OpenSlideConfig;
+  config: OpenFrameConfig;
   coreVersion: string;
 };
 
-const CONFIG_FILE = 'open-slide.config.ts';
+const CONFIG_FILE = 'open-frame.config.ts';
 
-const SLIDES_VMOD = 'virtual:open-slide/slides';
-const CONFIG_VMOD = 'virtual:open-slide/config';
-const FOLDERS_VMOD = 'virtual:open-slide/folders';
+const SLIDES_VMOD = 'virtual:open-frame/slides';
+const CONFIG_VMOD = 'virtual:open-frame/config';
+const FOLDERS_VMOD = 'virtual:open-frame/folders';
 
 type FoldersManifest = {
   folders: unknown[];
@@ -142,7 +142,7 @@ async function generateSlidesModule(
     ? `
 const slideImportTokens = ${importTokens};
 if (import.meta.hot) {
-  import.meta.hot.on('open-slide:slide-changed', (data) => {
+  import.meta.hot.on('open-frame:slide-changed', (data) => {
     const ids = Array.isArray(data?.slideIds) ? data.slideIds : data?.slideId ? [data.slideId] : [];
     const token = Date.now();
     for (const id of ids) {
@@ -161,7 +161,7 @@ if (import.meta.hot) {
     })
     .join('\n');
 
-  return `// virtual:open-slide/slides — generated
+  return `// virtual:open-frame/slides — generated
 export const slideIds = ${ids};
 export const slideThemes = ${themesJson};
 export const slideCreatedAt = ${createdAtJson};
@@ -176,7 +176,7 @@ ${cases}
 `;
 }
 
-export function openSlidePlugin(opts: OpenSlidePluginOptions): Plugin {
+export function openFramePlugin(opts: OpenFramePluginOptions): Plugin {
   const { userCwd, config, coreVersion } = opts;
   const slidesDir = config.slidesDir ?? 'slides';
   const slidesRoot = path.resolve(userCwd, slidesDir);
@@ -204,14 +204,14 @@ export function openSlidePlugin(opts: OpenSlidePluginOptions): Plugin {
       pendingSlideChanges.clear();
       server.ws.send({
         type: 'custom',
-        event: 'open-slide:slide-changed',
+        event: 'open-frame:slide-changed',
         data: { slideIds },
       });
     }, 100);
   };
 
   return {
-    name: 'open-slide',
+    name: 'open-frame',
     config(_c, env) {
       isDev = env.command === 'serve';
       return {
@@ -301,7 +301,7 @@ export function openSlidePlugin(opts: OpenSlidePluginOptions): Plugin {
   };
 }
 
-export async function loadUserConfig(userCwd: string): Promise<OpenSlideConfig> {
+export async function loadUserConfig(userCwd: string): Promise<OpenFrameConfig> {
   const file = path.join(userCwd, CONFIG_FILE);
   if (!existsSync(file)) return {};
   const loaded = await loadConfigFromFile(
@@ -310,5 +310,5 @@ export async function loadUserConfig(userCwd: string): Promise<OpenSlideConfig> 
     userCwd,
     'silent',
   );
-  return (loaded?.config ?? {}) as OpenSlideConfig;
+  return (loaded?.config ?? {}) as OpenFrameConfig;
 }
