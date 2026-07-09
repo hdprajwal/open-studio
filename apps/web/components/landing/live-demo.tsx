@@ -1,5 +1,6 @@
 'use client';
 
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import posthog from 'posthog-js';
 import { useState } from 'react';
 import { InlineSlidePlayer, inlineSlideCount } from './inline-slide-player';
@@ -31,30 +32,30 @@ export function LiveDemo() {
 
   return (
     <section id="demo" className="relative" aria-labelledby="demo-heading">
-      <div className="mx-auto max-w-[1360px] px-5 sm:px-8 lg:px-12 pt-4 sm:pt-8 lg:pt-12 pb-20 sm:pb-32">
+      <div className="mx-auto max-w-[1080px] px-5 sm:px-8 pt-4 sm:pt-8 pb-12 sm:pb-[88px]">
         <h2 id="demo-heading" className="sr-only">
           Live demo
         </h2>
         <div
-          className="relative block w-full overflow-hidden rounded-[8px] border border-[color:var(--color-rule)] bg-black"
+          className="relative block w-full overflow-hidden rounded-[12px] border border-[color:var(--color-hairline)] bg-black"
           style={{ aspectRatio: '16 / 9' }}
         >
           <InlineSlidePlayer index={index} onIndexChange={setIndex} />
         </div>
 
-        <div className="mt-6 flex items-center justify-between font-[family-name:var(--font-mono)] text-[11px] tracking-[0.12em] uppercase text-[color:var(--color-muted)]">
+        <div className="mt-6 flex items-center justify-between font-[family-name:var(--font-mono)] text-[12px] tracking-[0.08em] uppercase text-[color:var(--color-body)]">
           <a
-            href="https://demo.open-slide.dev/"
+            href="https://github.com/hdprajwal/open-frame/tree/main/apps/demo"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => posthog.capture('view_more_demos_clicked')}
-            className="inline-flex items-center gap-2 hover:text-[color:var(--color-text)] transition-colors"
+            className="inline-flex items-center gap-2 hover:text-[color:var(--color-ink)] transition-colors"
           >
-            View more demos
-            <span aria-hidden>↗</span>
+            Browse the demo workspace
+            <ArrowUpRight aria-hidden className="size-3.5" />
           </a>
           <span className="flex items-center gap-3">
-            <span className="text-[color:var(--color-text-soft)]">
+            <span className="text-[color:var(--color-charcoal)]">
               {String(index + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
             </span>
             <button
@@ -62,18 +63,18 @@ export function LiveDemo() {
               onClick={handlePrev}
               disabled={atStart}
               aria-label="Previous slide"
-              className="px-1.5 py-0.5 text-[color:var(--color-text-soft)] hover:text-[color:var(--color-text)] transition disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-[color:var(--color-text-soft)]"
+              className="px-1.5 py-0.5 text-[color:var(--color-charcoal)] hover:text-[color:var(--color-ink)] transition disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-[color:var(--color-charcoal)]"
             >
-              ←
+              <ArrowLeft aria-hidden className="size-4" />
             </button>
             <button
               type="button"
               onClick={handleNext}
               disabled={atEnd}
               aria-label="Next slide"
-              className="px-1.5 py-0.5 text-[color:var(--color-text-soft)] hover:text-[color:var(--color-text)] transition disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-[color:var(--color-text-soft)]"
+              className="px-1.5 py-0.5 text-[color:var(--color-charcoal)] hover:text-[color:var(--color-ink)] transition disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-[color:var(--color-charcoal)]"
             >
-              →
+              <ArrowRight aria-hidden className="size-4" />
             </button>
           </span>
         </div>

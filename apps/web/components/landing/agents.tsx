@@ -21,9 +21,9 @@ export function Agents() {
 
   return (
     <section id="agents" className="relative overflow-hidden">
-      <div className="border-y border-[color:var(--color-rule)] bg-[color:var(--color-panel)]">
-        <div className="mx-auto max-w-[1360px] px-5 sm:px-8 lg:px-12 py-10 sm:py-12">
-          <h2 className="font-[family-name:var(--font-sans)] text-[18px] sm:text-[20px] text-[color:var(--color-text-soft)] font-normal">
+      <div className="bg-[color:var(--color-canvas)]">
+        <div className="mx-auto max-w-[1080px] px-5 sm:px-8 py-10 sm:py-12">
+          <h2 className="font-[family-name:var(--font-sans)] text-[18px] font-medium leading-[1.56]">
             Bring your own agent. Anything that edits React works.
           </h2>
         </div>
@@ -39,7 +39,7 @@ export function Agents() {
             {track.map((agent, i) => (
               <span key={`${agent.file}-${i}`} className="inline-flex items-center gap-4">
                 <AgentLogo agent={agent} />
-                <span className="font-[family-name:var(--font-sans)] text-[color:var(--color-text)] text-[22px] sm:text-[28px] lg:text-[36px] tracking-[-0.02em]">
+                <span className="font-[family-name:var(--font-sans)] text-[color:var(--color-ink)] text-[24px] tracking-[-0.02em]">
                   {agent.name}
                 </span>
               </span>
@@ -55,18 +55,6 @@ function AgentLogo({ agent }: { agent: Agent }) {
   const alt = agent.name;
   const cls = 'h-[28px] md:h-[34px] lg:h-[40px] w-auto object-contain shrink-0';
 
-  if (!agent.variants) {
-    return <img src={`/assets/${agent.file}.svg`} alt={alt} className={cls} />;
-  }
-  return (
-    <>
-      <img src={`/assets/${agent.file}-dark.svg`} alt={alt} className={`${cls} logo-dark`} />
-      <img
-        src={`/assets/${agent.file}-light.svg`}
-        alt=""
-        aria-hidden
-        className={`${cls} logo-light`}
-      />
-    </>
-  );
+  const file = agent.variants ? `${agent.file}-light` : agent.file;
+  return <img src={`/assets/${file}.svg`} alt={alt} className={cls} />;
 }

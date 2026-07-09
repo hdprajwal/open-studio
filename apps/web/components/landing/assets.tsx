@@ -33,12 +33,12 @@ const callouts: { eyebrow: string; title: string; body: ReactNode }[] = [
           href="https://svgl.app/"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-[family-name:var(--font-mono)] text-[color:var(--color-accent-soft)] underline-offset-4 hover:underline"
+          className="font-[family-name:var(--font-mono)] text-[color:var(--color-ink)] underline underline-offset-4"
         >
           svgl
         </a>{' '}
         from inside the editor. Pick a result and the SVG lands in your assets folder, ready to{' '}
-        <code className="font-[family-name:var(--font-mono)] text-[color:var(--color-text)]">
+        <code className="font-[family-name:var(--font-mono)] text-[color:var(--color-ink)]">
           import
         </code>
         .
@@ -50,36 +50,25 @@ const callouts: { eyebrow: string; title: string; body: ReactNode }[] = [
 export function Assets() {
   return (
     <section id="assets" className="relative">
-      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-[color:var(--color-rule)]" />
-      <div className="mx-auto max-w-[1360px] px-5 sm:px-8 lg:px-12 py-20 sm:py-32 lg:py-40">
-        <h2 className="text-[32px] sm:text-[44px] lg:text-[64px] leading-[1.1] sm:leading-[1.05] tracking-[-0.03em] max-w-[820px] mb-14 sm:mb-20">
-          <span className="font-[family-name:var(--font-sans)] font-medium">Drop in images.</span>
-          <br />
-          <span className="font-[family-name:var(--font-display)] italic text-[color:var(--color-warm)]">
-            Pull in logos.
-          </span>
+      <div className="mx-auto max-w-[1080px] px-5 sm:px-8 py-12 sm:py-16 lg:py-[88px]">
+        <h2 className="text-[24px] sm:text-[30px] font-medium leading-[1.2] mb-10 sm:mb-14">
+          Drop in images. Pull in logos.
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:gap-12 items-start">
           {/* asset manager mock */}
-          <div className="lg:col-span-8">
-            <AssetManagerMock />
-          </div>
+          <AssetManagerMock />
 
           {/* side callouts */}
-          <div className="lg:col-span-4 flex flex-col gap-px bg-[color:var(--color-rule)] border border-[color:var(--color-rule)] rounded-[6px] overflow-hidden">
+          <div className="flex gap-px bg-[color:var(--color-hairline)] border border-[color:var(--color-hairline)] rounded-[12px] overflow-hidden">
             {callouts.map((c) => (
               <div
                 key={c.eyebrow}
-                className="bg-[color:var(--color-ink)] p-6 sm:p-7 lg:p-8 flex flex-col gap-3"
+                className="bg-[color:var(--color-canvas)] p-6 sm:p-7 flex flex-col gap-3"
               >
                 <span className="caption">{c.eyebrow}</span>
-                <h3 className="text-[22px] lg:text-[24px] font-medium tracking-[-0.025em] leading-[1.2]">
-                  {c.title}
-                </h3>
-                <p className="text-[14px] leading-[1.6] text-[color:var(--color-text-soft)] max-w-[40ch]">
-                  {c.body}
-                </p>
+                <h3 className="text-[20px] font-medium leading-[1.4]">{c.title}</h3>
+                <p className="text-[14px] leading-[1.5] text-[color:var(--color-body)]">{c.body}</p>
               </div>
             ))}
           </div>
@@ -91,9 +80,9 @@ export function Assets() {
 
 function AssetManagerMock() {
   return (
-    <div className="relative rounded-[6px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel)] overflow-hidden">
+    <div className="relative rounded-[12px] border border-[color:var(--color-hairline)] bg-[color:var(--color-canvas)] overflow-hidden">
       {/* window header */}
-      <div className="flex items-center px-4 sm:px-5 h-10 sm:h-11 border-b border-[color:var(--color-rule)] font-[family-name:var(--font-mono)] text-[12px] text-[color:var(--color-muted)]">
+      <div className="flex items-center px-4 sm:px-5 h-10 sm:h-11 border-b border-[color:var(--color-hairline)] font-[family-name:var(--font-mono)] text-[12px] text-[color:var(--color-body)]">
         <div className="flex items-center gap-2">
           <span className="size-[10px] rounded-full bg-[#ff5f56]" />
           <span className="size-[10px] rounded-full bg-[#ffbd2e]" />
@@ -104,21 +93,21 @@ function AssetManagerMock() {
       </div>
 
       {/* toolbar — slides/assets switcher + upload */}
-      <div className="flex items-center justify-between gap-3 px-4 sm:px-5 py-3 sm:py-4 border-b border-[color:var(--color-rule)]">
-        <div className="relative inline-flex rounded-full border border-[color:var(--color-rule)] bg-[color:var(--color-panel-hi)] p-1">
+      <div className="flex items-center justify-between gap-3 px-4 sm:px-5 py-3 sm:py-4 border-b border-[color:var(--color-hairline)]">
+        <div className="relative inline-flex rounded-full border border-[color:var(--color-hairline)] bg-[color:var(--color-surface)] p-1">
           <span
             aria-hidden
-            className="absolute top-1 bottom-1 left-1/2 right-1 rounded-full border border-[color:var(--color-accent)] bg-[color:var(--color-accent)]/15"
+            className="absolute top-1 bottom-1 left-1/2 right-1 rounded-full border border-[color:var(--color-brand)] bg-[color:var(--color-brand)]/15"
           />
-          <span className="relative px-4 py-1.5 font-[family-name:var(--font-mono)] text-[12px] text-[color:var(--color-muted)]">
+          <span className="relative px-4 py-1.5 font-[family-name:var(--font-mono)] text-[12px] text-[color:var(--color-body)]">
             Slides
           </span>
-          <span className="relative px-4 py-1.5 font-[family-name:var(--font-mono)] text-[12px] text-[color:var(--color-accent-soft)]">
+          <span className="relative px-4 py-1.5 font-[family-name:var(--font-mono)] text-[12px] text-[color:var(--color-brand)]">
             Assets
           </span>
         </div>
-        <span className="inline-flex items-center gap-2 rounded-[6px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel-hi)] px-3.5 py-1.5 font-[family-name:var(--font-sans)] text-[13px] text-[color:var(--color-text)]">
-          <span className="text-[color:var(--color-accent-soft)]">↑</span>
+        <span className="inline-flex items-center gap-2 rounded-[8px] border border-[color:var(--color-hairline)] bg-[color:var(--color-surface)] px-3.5 py-1.5 font-[family-name:var(--font-sans)] text-[13px] text-[color:var(--color-ink)]">
+          <span className="text-[color:var(--color-brand)]">↑</span>
           Upload
         </span>
       </div>
@@ -132,13 +121,13 @@ function AssetManagerMock() {
         </div>
 
         {/* svgl Logo Search dialog */}
-        <div className="absolute right-3 sm:right-5 bottom-3 sm:bottom-5 w-[80%] sm:w-[64%] max-w-[420px] rounded-[6px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel-hi)] shadow-[0_10px_28px_-14px_rgba(0,0,0,0.35)] p-4">
-          <div className="flex items-center justify-between mb-3 font-[family-name:var(--font-mono)] text-[11px] text-[color:var(--color-muted)]">
+        <div className="absolute right-3 sm:right-5 bottom-3 sm:bottom-5 w-[80%] sm:w-[64%] max-w-[420px] rounded-[8px] border border-[color:var(--color-hairline)] bg-[color:var(--color-surface)] shadow-[0_10px_28px_-14px_rgba(0,0,0,0.35)] p-4">
+          <div className="flex items-center justify-between mb-3 font-[family-name:var(--font-mono)] text-[12px] text-[color:var(--color-body)]">
             <span>Search svgl</span>
-            <span className="text-[color:var(--color-dim)]">✕</span>
+            <span className="text-[color:var(--color-mute)]">✕</span>
           </div>
-          <div className="flex items-center gap-2 rounded-[6px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel)] px-3 py-2 mb-3 font-[family-name:var(--font-mono)] text-[13px] text-[color:var(--color-text)]">
-            <span className="text-[color:var(--color-muted)]">⌕</span>
+          <div className="flex items-center gap-2 rounded-[8px] border border-[color:var(--color-hairline)] bg-[color:var(--color-canvas)] px-3 py-2 mb-3 font-[family-name:var(--font-mono)] text-[13px] text-[color:var(--color-ink)]">
+            <span className="text-[color:var(--color-body)]">⌕</span>
             <span>vercel</span>
             <span className="caret" aria-hidden />
           </div>
@@ -146,36 +135,20 @@ function AssetManagerMock() {
             {svglResults.map((r, i) => (
               <div
                 key={r.name}
-                className={`rounded-[6px] border ${
+                className={`rounded-[8px] border ${
                   i === 0
-                    ? 'border-[color:var(--color-accent)] bg-[color:var(--color-accent)]/[0.06]'
-                    : 'border-[color:var(--color-rule)] bg-[color:var(--color-panel)]'
+                    ? 'border-[color:var(--color-brand)] bg-[color:var(--color-brand)]/[0.06]'
+                    : 'border-[color:var(--color-hairline)] bg-[color:var(--color-canvas)]'
                 } p-2 flex flex-col items-center gap-1.5`}
               >
                 <div className="h-8 flex items-center justify-center">
-                  {r.themed ? (
-                    <>
-                      <img
-                        src={`/assets/${r.logo}-dark.svg`}
-                        alt={r.name}
-                        className="h-7 w-auto object-contain logo-dark"
-                      />
-                      <img
-                        src={`/assets/${r.logo}-light.svg`}
-                        alt=""
-                        aria-hidden
-                        className="h-7 w-auto object-contain logo-light"
-                      />
-                    </>
-                  ) : (
-                    <img
-                      src={`/assets/${r.logo}.svg`}
-                      alt={r.name}
-                      className="h-7 w-auto object-contain"
-                    />
-                  )}
+                  <img
+                    src={`/assets/${r.logo}${r.themed ? '-light' : ''}.svg`}
+                    alt={r.name}
+                    className="h-7 w-auto object-contain"
+                  />
                 </div>
-                <span className="font-[family-name:var(--font-mono)] text-[10px] text-[color:var(--color-text-soft)]">
+                <span className="font-[family-name:var(--font-mono)] text-[12px] text-[color:var(--color-charcoal)]">
                   {r.name}
                 </span>
               </div>
@@ -189,51 +162,28 @@ function AssetManagerMock() {
 
 function AssetCard({ asset }: { asset: AssetMock }) {
   return (
-    <div className="rounded-[6px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel-hi)] overflow-hidden flex flex-col">
+    <div className="rounded-[8px] border border-[color:var(--color-hairline)] bg-[color:var(--color-surface)] overflow-hidden flex flex-col">
       <div
         className="h-[80px] sm:h-[120px] flex items-center justify-center"
         style={{
           background:
-            'repeating-conic-gradient(color-mix(in srgb, var(--color-rule) 70%, transparent) 0 25%, transparent 0 50%) 0 0 / 16px 16px',
+            'repeating-conic-gradient(color-mix(in srgb, var(--color-hairline) 70%, transparent) 0 25%, transparent 0 50%) 0 0 / 16px 16px',
         }}
       >
-        {asset.themed ? (
-          <>
-            <img
-              src={`/assets/${asset.logo}-dark.svg`}
-              alt=""
-              className="h-12 w-auto object-contain agent-mono logo-dark"
-            />
-            <img
-              src={`/assets/${asset.logo}-light.svg`}
-              alt=""
-              aria-hidden
-              className="h-12 w-auto object-contain agent-mono logo-light"
-            />
-          </>
-        ) : (
-          <img
-            src={`/assets/${asset.logo}.svg`}
-            alt=""
-            className="h-12 w-auto object-contain agent-mono"
-          />
-        )}
+        <img
+          src={`/assets/${asset.logo}${asset.themed ? '-light' : ''}.svg`}
+          alt=""
+          className="h-12 w-auto object-contain agent-mono"
+        />
       </div>
-      <div className="border-t border-[color:var(--color-rule)] px-3 py-2">
+      <div className="border-t border-[color:var(--color-hairline)] px-3 py-2">
         <div
-          className="font-[family-name:var(--font-sans)] text-[13px] text-[color:var(--color-text)] truncate"
+          className="font-[family-name:var(--font-sans)] text-[13px] text-[color:var(--color-ink)] truncate"
           title={asset.name}
         >
-          {asset.themed ? (
-            <>
-              <span className="logo-dark">{asset.name}</span>
-              <span className="logo-light">{asset.name.replace('-dark', '-light')}</span>
-            </>
-          ) : (
-            asset.name
-          )}
+          {asset.themed ? asset.name.replace('-dark', '-light') : asset.name}
         </div>
-        <div className="font-[family-name:var(--font-mono)] text-[10px] text-[color:var(--color-muted)] mt-0.5">
+        <div className="font-[family-name:var(--font-mono)] text-[12px] text-[color:var(--color-body)] mt-0.5">
           {asset.size}
         </div>
       </div>

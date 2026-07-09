@@ -1,64 +1,66 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import posthog from 'posthog-js';
-import { ThemeToggle } from './theme-toggle';
 
-export function Nav({ githubStars }: { githubStars?: string | null }) {
+export function Nav() {
   return (
-    <header className="sticky top-0 z-40 bg-[color:var(--color-ink)]/80 backdrop-blur-md border-b border-[color:var(--color-rule-soft)]">
-      <div className="mx-auto max-w-[1360px] px-5 sm:px-8 lg:px-12 h-16 flex items-center justify-between">
-        <Link
-          href="/"
-          className="flex items-center gap-3 font-[family-name:var(--font-mono)] text-[13px] tracking-[0.04em]"
-        >
-          <Image
-            src="/open-slide.png"
-            alt="open-slide logo"
-            width={24}
-            height={24}
-            priority
-            className="block h-6 w-6 rounded-[4px]"
-          />
-          <span className="text-[color:var(--color-text)]">open-slide</span>
+    <header className="bg-[color:var(--color-canvas)] border-b border-[color:var(--color-hairline)]">
+      <div className="mx-auto px-5 sm:px-8 lg:px-12 h-14 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-3">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 600 600"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_1_2)">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M307.071 6.07107C303.166 2.16583 296.834 2.16582 292.929 6.07107L178.285 120.715C174.38 124.62 174.38 130.952 178.285 134.857L207.072 163.643C210.977 167.548 217.309 167.548 221.214 163.643L292.929 91.9282C296.834 88.023 303.166 88.023 307.071 91.9282L378.786 163.643C382.691 167.548 389.023 167.548 392.928 163.643L421.715 134.857C425.62 130.952 425.62 124.62 421.715 120.715L307.071 6.07107ZM478.785 177.785C474.88 173.88 468.548 173.88 464.643 177.785L435.857 206.572C431.952 210.477 431.952 216.809 435.857 220.714L507.572 292.429C511.477 296.334 511.477 302.666 507.572 306.571L435.857 378.286C431.952 382.191 431.952 388.523 435.857 392.428L464.643 421.215C468.548 425.12 474.88 425.12 478.785 421.215L593.429 306.571C597.334 302.666 597.334 296.334 593.429 292.429L478.785 177.785ZM135.357 177.785C131.452 173.88 125.12 173.88 121.215 177.785L6.57108 292.429C2.66583 296.334 2.66584 302.666 6.57108 306.571L121.215 421.215C125.12 425.12 131.452 425.12 135.357 421.215L164.143 392.428C168.048 388.523 168.048 382.191 164.143 378.286L92.4282 306.571C88.523 302.666 88.523 296.334 92.4282 292.429L164.143 220.714C168.048 216.809 168.048 210.477 164.143 206.572L135.357 177.785ZM392.928 435.357C389.023 431.452 382.691 431.452 378.786 435.357L307.071 507.072C303.166 510.977 296.834 510.977 292.929 507.072L221.214 435.357C217.309 431.452 210.977 431.452 207.072 435.357L178.285 464.143C174.38 468.048 174.38 474.38 178.285 478.285L292.929 592.929C296.834 596.834 303.166 596.834 307.071 592.929L421.715 478.285C425.62 474.38 425.62 468.048 421.715 464.143L392.928 435.357Z"
+                fill="currentColor"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_1_2">
+                <rect width="600" height="600" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
+          <span className="text-[16px] font-medium">open-frame</span>
         </Link>
 
-        <nav className="flex items-center gap-8 font-[family-name:var(--font-mono)] text-[12px] tracking-[0.08em] uppercase">
+        <nav className="flex items-center gap-6 text-[14px] font-medium">
           <Link
             href="/docs"
-            className="hidden md:inline text-[color:var(--color-muted)] hover:text-[color:var(--color-text)] transition-colors"
+            className="hidden md:inline text-[color:var(--color-body)] hover:text-[color:var(--color-ink)] transition-colors"
           >
             Docs
           </Link>
-          <a
-            href="https://demo.open-slide.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/#demo"
             onClick={() => posthog.capture('nav_external_link_clicked', { label: 'demo' })}
-            className="hidden md:inline text-[color:var(--color-muted)] hover:text-[color:var(--color-text)] transition-colors"
+            className="hidden md:inline text-[color:var(--color-body)] hover:text-[color:var(--color-ink)] transition-colors"
           >
-            Demo ↗
-          </a>
+            Demo
+          </Link>
           <a
-            href="https://github.com/1weiho/open-slide"
+            href="https://github.com/hdprajwal/open-frame"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => posthog.capture('nav_external_link_clicked', { label: 'github' })}
-            className="hidden md:inline-flex items-center gap-2 text-[color:var(--color-muted)] hover:text-[color:var(--color-text)] transition-colors"
+            className="hidden md:inline text-[color:var(--color-body)] hover:text-[color:var(--color-ink)] transition-colors"
           >
-            <span>GitHub ↗</span>
-            {githubStars ? (
-              <span
-                aria-label={`${githubStars} GitHub stars`}
-                className="inline-flex items-center gap-1 rounded-full border border-[color:var(--color-rule-soft)] px-2 py-[2px] text-[10px] tracking-[0.06em] text-[color:var(--color-text)]"
-              >
-                <span aria-hidden>★</span>
-                {githubStars}
-              </span>
-            ) : null}
+            GitHub
           </a>
-          <ThemeToggle />
+          <Link
+            href="/docs"
+            className="inline-flex items-center h-9 rounded-[8px] bg-[color:var(--color-primary)] px-5 text-[color:var(--color-on-primary)] hover:bg-[color:var(--color-ink-deep)] transition-colors"
+          >
+            Get started
+          </Link>
         </nav>
       </div>
     </header>

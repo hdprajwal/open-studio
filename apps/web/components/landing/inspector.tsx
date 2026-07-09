@@ -13,19 +13,12 @@ import { type ReactNode, useEffect, useRef } from 'react';
 export function Inspector() {
   return (
     <section id="inspector" className="relative">
-      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-[color:var(--color-rule)]" />
-      <div className="mx-auto max-w-[1360px] px-5 sm:px-8 lg:px-12 py-20 sm:py-32 lg:py-40">
-        <h2 className="text-[32px] sm:text-[44px] lg:text-[64px] leading-[1.1] sm:leading-[1.05] tracking-[-0.03em] max-w-[860px] mb-14 sm:mb-20">
-          <span className="font-[family-name:var(--font-sans)] font-medium">
-            Talk to the agent.
-          </span>
-          <br />
-          <span className="font-[family-name:var(--font-display)] italic text-[color:var(--color-accent)]">
-            Or just tap the canvas.
-          </span>
+      <div className="mx-auto max-w-[1080px] px-5 sm:px-8 py-12 sm:py-16 lg:py-[88px]">
+        <h2 className="text-[24px] sm:text-[30px] font-medium leading-[1.2] mb-10 sm:mb-14">
+          Talk to the agent. Or just tap the canvas.
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-[color:var(--color-rule)] border border-[color:var(--color-rule)] rounded-[6px] overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-[color:var(--color-hairline)] border border-[color:var(--color-hairline)] rounded-[12px] overflow-hidden">
           <FeatureCell
             num="01"
             kicker="agent applies"
@@ -33,11 +26,11 @@ export function Inspector() {
             body={
               <>
                 Click any block, leave a note. The inspector pins it as a{' '}
-                <span className="font-[family-name:var(--font-mono)] text-[color:var(--color-accent-soft)]">
+                <span className="font-[family-name:var(--font-mono)] text-[color:var(--color-ink)]">
                   @slide-comment
                 </span>{' '}
                 marker in your source. Run{' '}
-                <span className="font-[family-name:var(--font-mono)] text-[color:var(--color-accent-soft)]">
+                <span className="font-[family-name:var(--font-mono)] text-[color:var(--color-ink)]">
                   /apply-comments
                 </span>{' '}
                 — the agent edits exactly what you flagged and clears the marker.
@@ -72,16 +65,14 @@ function FeatureCell({
   visual: ReactNode;
 }) {
   return (
-    <div className="group relative bg-[color:var(--color-ink)] flex flex-col gap-10 p-8 sm:p-10 lg:p-12 transition-colors hover:bg-[color:var(--color-panel)]">
-      <span className="font-[family-name:var(--font-mono)] text-[11px] tracking-[0.18em] uppercase text-[color:var(--color-muted)]">
+    <div className="group relative bg-[color:var(--color-canvas)] flex flex-col gap-8 p-6 sm:p-8">
+      <span className="font-[family-name:var(--font-mono)] text-[12px] tracking-[0.08em] uppercase text-[color:var(--color-mute)]">
         {num} · {kicker}
       </span>
 
       <div>
-        <h3 className="text-[22px] sm:text-[26px] lg:text-[30px] font-medium tracking-[-0.025em] leading-[1.15] max-w-[28ch]">
-          {title}
-        </h3>
-        <p className="mt-4 text-[15px] leading-[1.65] text-[color:var(--color-text-soft)] max-w-[44ch]">
+        <h3 className="text-[20px] font-medium leading-[1.4] max-w-[28ch]">{title}</h3>
+        <p className="mt-2 text-[14px] leading-[1.5] text-[color:var(--color-body)] max-w-[44ch]">
           {body}
         </p>
       </div>
@@ -133,7 +124,7 @@ function AgentApplyVisual() {
   return (
     <div
       ref={ref}
-      className="relative rounded-[6px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel)] overflow-hidden"
+      className="relative rounded-[8px] border border-[color:var(--color-hairline)] bg-[color:var(--color-canvas)] overflow-hidden"
     >
       <div
         className="relative aspect-[16/9] grid grid-cols-[1fr_42%]"
@@ -142,7 +133,7 @@ function AgentApplyVisual() {
         {/* canvas */}
         <div className="relative overflow-hidden">
           <div className="absolute inset-0 px-[5cqw] py-[5cqw] flex flex-col justify-center gap-[1.4cqw]">
-            <span className="font-[family-name:var(--font-mono)] text-[1.3cqw] tracking-[0.18em] uppercase text-[color:var(--color-muted)]">
+            <span className="font-[family-name:var(--font-mono)] text-[1.3cqw] tracking-[0.18em] uppercase text-[color:var(--color-body)]">
               cover
             </span>
             <div className="relative inline-flex w-fit">
@@ -160,21 +151,21 @@ function AgentApplyVisual() {
                 transition={loopTransition([0, 0.11, 0.14, 0.86, 0.92, 1])}
               />
               <motion.span
-                className="relative font-[family-name:var(--font-sans)] font-semibold tracking-[-0.035em] leading-[1.0]"
+                className="relative font-[family-name:var(--font-sans)] font-medium tracking-[-0.035em] leading-[1.0]"
                 style={{ fontSize: '6.4cqw' }}
                 animate={
                   active
                     ? {
                         color: [
-                          'var(--color-text)',
-                          'var(--color-text)',
-                          'var(--color-accent)',
-                          'var(--color-accent)',
-                          'var(--color-text)',
-                          'var(--color-text)',
+                          'var(--color-ink)',
+                          'var(--color-ink)',
+                          'var(--color-brand)',
+                          'var(--color-brand)',
+                          'var(--color-ink)',
+                          'var(--color-ink)',
                         ],
                       }
-                    : { color: 'var(--color-text)' }
+                    : { color: 'var(--color-ink)' }
                 }
                 transition={loopTransition([0, 0.7, 0.74, 0.86, 0.92, 1])}
               >
@@ -182,7 +173,7 @@ function AgentApplyVisual() {
               </motion.span>
             </div>
             <span
-              className="font-[family-name:var(--font-sans)] text-[color:var(--color-text-soft)] max-w-[80%]"
+              className="font-[family-name:var(--font-sans)] text-[color:var(--color-charcoal)] max-w-[80%]"
               style={{ fontSize: '1.5cqw', lineHeight: 1.4 }}
             >
               What we're shipping, why it matters.
@@ -226,7 +217,7 @@ function AgentApplyVisual() {
 
           {/* "Agent applying..." status pill — appears after submit, fades before style change settles */}
           <motion.div
-            className="absolute right-[1.5cqw] bottom-[1.5cqw] inline-flex items-center gap-[0.55cqw] rounded-full border border-[color:var(--color-rule)] bg-[color:var(--color-panel-hi)] font-[family-name:var(--font-sans)] text-[color:var(--color-text)] shadow-[0_8px_24px_-12px_rgba(0,0,0,0.35)]"
+            className="absolute right-[1.5cqw] bottom-[1.5cqw] inline-flex items-center gap-[0.55cqw] rounded-full border border-[color:var(--color-hairline)] bg-[color:var(--color-surface)] font-[family-name:var(--font-sans)] text-[color:var(--color-ink)] shadow-[0_8px_24px_-12px_rgba(0,0,0,0.35)]"
             style={{ padding: '0.55cqw 0.9cqw', fontSize: '1.05cqw' }}
             animate={
               active
@@ -239,42 +230,42 @@ function AgentApplyVisual() {
             transition={loopTransition([0, 0.55, 0.6, 0.78, 0.82, 1])}
           >
             <SpinnerGlyph active={active} />
-            <span style={{ color: 'var(--color-muted)' }}>Agent applying</span>
+            <span style={{ color: 'var(--color-body)' }}>Agent applying</span>
             <ApplyingDots active={active} />
           </motion.div>
         </div>
 
         {/* InspectorPanel — slides in from the right after click */}
         <motion.div
-          className="border-l border-[color:var(--color-rule)] bg-[color:var(--color-panel-hi)] flex flex-col overflow-hidden"
+          className="border-l border-[color:var(--color-hairline)] bg-[color:var(--color-surface)] flex flex-col overflow-hidden"
           animate={active ? { x: ['100%', '100%', '0%', '0%', '100%', '100%'] } : { x: '0%' }}
           transition={loopTransition([0, 0.15, 0.24, 0.86, 0.93, 1])}
         >
           {/* header */}
           <div
-            className="border-b border-[color:var(--color-rule)] flex items-center justify-between"
+            className="border-b border-[color:var(--color-hairline)] flex items-center justify-between"
             style={{ padding: '1.4cqw 1.6cqw' }}
           >
             <div className="flex items-center gap-[0.6cqw]">
               <span
-                className="font-[family-name:var(--font-sans)] font-semibold tracking-tight text-[color:var(--color-text)]"
+                className="font-[family-name:var(--font-sans)] font-medium tracking-tight text-[color:var(--color-ink)]"
                 style={{ fontSize: '1.25cqw' }}
               >
                 Inspect
               </span>
               <span
                 aria-hidden
-                className="bg-[color:var(--color-rule)]"
+                className="bg-[color:var(--color-hairline)]"
                 style={{ width: '1px', height: '1.4cqw' }}
               />
               <span
-                className="rounded-[3px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel)] font-[family-name:var(--font-mono)] text-[color:var(--color-text)]"
+                className="rounded-[3px] border border-[color:var(--color-hairline)] bg-[color:var(--color-canvas)] font-[family-name:var(--font-mono)] text-[color:var(--color-ink)]"
                 style={{ padding: '0.1cqw 0.5cqw', fontSize: '1cqw' }}
               >
                 &lt;h1&gt;
               </span>
             </div>
-            <span className="text-[color:var(--color-dim)]">✕</span>
+            <span className="text-[color:var(--color-mute)]">✕</span>
           </div>
 
           <PanelSection label="Content">
@@ -285,7 +276,7 @@ function AgentApplyVisual() {
 
           <PanelSection label="Leave a comment">
             <motion.div
-              className="relative rounded-[4px] border bg-[color:var(--color-panel)]"
+              className="relative rounded-[4px] border bg-[color:var(--color-canvas)]"
               style={{
                 fontSize: '1.1cqw',
                 padding: '0.7cqw 0.8cqw',
@@ -296,24 +287,24 @@ function AgentApplyVisual() {
                 active
                   ? {
                       borderColor: [
-                        'var(--color-rule)',
-                        'var(--color-rule)',
-                        'var(--color-accent)',
-                        'var(--color-accent)',
-                        'var(--color-rule)',
-                        'var(--color-rule)',
+                        'var(--color-hairline)',
+                        'var(--color-hairline)',
+                        'var(--color-brand)',
+                        'var(--color-brand)',
+                        'var(--color-hairline)',
+                        'var(--color-hairline)',
                       ],
                       boxShadow: [
                         '0 0 0 0 transparent',
                         '0 0 0 0 transparent',
-                        '0 0 0 0.25cqw color-mix(in oklab, var(--color-accent) 16%, transparent)',
-                        '0 0 0 0.25cqw color-mix(in oklab, var(--color-accent) 16%, transparent)',
+                        '0 0 0 0.25cqw color-mix(in oklab, var(--color-brand) 16%, transparent)',
+                        '0 0 0 0.25cqw color-mix(in oklab, var(--color-brand) 16%, transparent)',
                         '0 0 0 0 transparent',
                         '0 0 0 0 transparent',
                       ],
                     }
                   : {
-                      borderColor: 'var(--color-rule)',
+                      borderColor: 'var(--color-hairline)',
                       boxShadow: '0 0 0 0 transparent',
                     }
               }
@@ -321,17 +312,17 @@ function AgentApplyVisual() {
             >
               <motion.span
                 aria-hidden
-                className="absolute pointer-events-none text-[color:var(--color-muted)]"
+                className="absolute pointer-events-none text-[color:var(--color-body)]"
                 style={{ left: '0.8cqw', top: '0.7cqw' }}
                 animate={active ? { opacity: [1, 1, 0, 0, 1, 1] } : { opacity: 0 }}
                 transition={loopTransition([0, 0.28, 0.3, 0.78, 0.82, 1])}
               >
                 Add a note...
               </motion.span>
-              <motion.span className="text-[color:var(--color-text)]">{commentText}</motion.span>
+              <motion.span className="text-[color:var(--color-ink)]">{commentText}</motion.span>
               <motion.span
                 aria-hidden
-                className="inline-block align-[-0.15em] bg-[color:var(--color-text)]"
+                className="inline-block align-[-0.15em] bg-[color:var(--color-ink)]"
                 style={{
                   width: '0.12cqw',
                   height: '1.3cqw',
@@ -343,13 +334,13 @@ function AgentApplyVisual() {
             </motion.div>
             <div className="flex items-center justify-between" style={{ marginTop: '0.7cqw' }}>
               <span
-                className="font-[family-name:var(--font-mono)] text-[color:var(--color-dim)]"
+                className="font-[family-name:var(--font-mono)] text-[color:var(--color-mute)]"
                 style={{ fontSize: '0.95cqw' }}
               >
                 Cmd + Enter to submit
               </span>
               <motion.span
-                className="inline-flex items-center font-[family-name:var(--font-sans)] font-medium text-[color:var(--color-brand-foreground,white)] rounded-[4px] bg-[color:var(--color-accent)]"
+                className="inline-flex items-center font-[family-name:var(--font-sans)] font-medium text-[color:var(--color-brand-foreground,white)] rounded-[4px] bg-[color:var(--color-brand)]"
                 style={{ fontSize: '1.1cqw', padding: '0.45cqw 0.9cqw' }}
                 animate={active ? { scale: [1, 1, 0.94, 1, 1] } : { scale: 1 }}
                 transition={loopTransition([0, 0.52, 0.54, 0.57, 1])}
@@ -370,7 +361,7 @@ function SpinnerGlyph({ active }: { active: boolean }) {
       aria-hidden
       viewBox="0 0 24 24"
       fill="none"
-      stroke="var(--color-accent)"
+      stroke="var(--color-brand)"
       strokeWidth={2.2}
       strokeLinecap="round"
       style={{ width: '1.3cqw', height: '1.3cqw' }}
@@ -386,7 +377,7 @@ function SpinnerGlyph({ active }: { active: boolean }) {
 function ApplyingDots({ active }: { active: boolean }) {
   return (
     <span
-      className="inline-flex items-end gap-[0.15cqw] text-[color:var(--color-muted)]"
+      className="inline-flex items-end gap-[0.15cqw] text-[color:var(--color-body)]"
       style={{ width: '1.8cqw' }}
     >
       {[0, 1, 2].map((i) => (
@@ -441,7 +432,7 @@ function VisualEditorVisual() {
   return (
     <div
       ref={ref}
-      className="relative rounded-[6px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel)] overflow-hidden"
+      className="relative rounded-[8px] border border-[color:var(--color-hairline)] bg-[color:var(--color-canvas)] overflow-hidden"
     >
       <div
         className="relative aspect-[16/9] grid grid-cols-[1fr_42%]"
@@ -450,7 +441,7 @@ function VisualEditorVisual() {
         {/* canvas */}
         <div className="relative overflow-hidden">
           <div className="absolute inset-0 px-[5cqw] py-[5cqw] flex flex-col justify-center gap-[1.4cqw]">
-            <span className="font-[family-name:var(--font-mono)] text-[1.3cqw] tracking-[0.18em] uppercase text-[color:var(--color-muted)]">
+            <span className="font-[family-name:var(--font-mono)] text-[1.3cqw] tracking-[0.18em] uppercase text-[color:var(--color-body)]">
               cover
             </span>
             <div className="relative inline-flex w-fit">
@@ -459,14 +450,14 @@ function VisualEditorVisual() {
                 className="absolute -inset-[0.6cqw] border-2 border-[#3b82f6] bg-[#3b82f6]/10 pointer-events-none"
               />
               <motion.span
-                className="relative font-[family-name:var(--font-sans)] font-semibold tracking-[-0.035em] leading-[1.0] text-[color:var(--color-accent)]"
+                className="relative font-[family-name:var(--font-sans)] font-medium tracking-[-0.035em] leading-[1.0] text-[color:var(--color-brand)]"
                 style={{ fontSize }}
               >
                 Q2 Launch
               </motion.span>
             </div>
             <span
-              className="font-[family-name:var(--font-sans)] text-[color:var(--color-text-soft)] max-w-[80%]"
+              className="font-[family-name:var(--font-sans)] text-[color:var(--color-charcoal)] max-w-[80%]"
               style={{ fontSize: '1.5cqw', lineHeight: 1.4 }}
             >
               What we're shipping, why it matters.
@@ -476,35 +467,35 @@ function VisualEditorVisual() {
           {/* SaveBar — matches core/SaveCard layout */}
           <div className="absolute left-1/2 -translate-x-1/2" style={{ bottom: '3cqw' }}>
             <div
-              className="inline-flex items-center gap-[0.4cqw] whitespace-nowrap rounded-[6px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel-hi)]/95 backdrop-blur-md shadow-[0_8px_24px_-12px_rgba(0,0,0,0.35)]"
+              className="inline-flex items-center gap-[0.4cqw] whitespace-nowrap rounded-[8px] border border-[color:var(--color-hairline)] bg-[color:var(--color-surface)]/95 backdrop-blur-md shadow-[0_8px_24px_-12px_rgba(0,0,0,0.35)]"
               style={{ padding: '0.35cqw 0.35cqw 0.35cqw 0.5cqw' }}
             >
               <SaveBarIconBtn glyph={<UndoGlyph />} />
               <SaveBarIconBtn glyph={<RedoGlyph />} dim />
               <span
                 aria-hidden
-                className="bg-[color:var(--color-rule)]"
+                className="bg-[color:var(--color-hairline)]"
                 style={{ width: '1px', height: '1.6cqw', margin: '0 0.2cqw' }}
               />
               <span
-                className="inline-flex items-center gap-[0.5cqw] font-[family-name:var(--font-sans)] font-medium text-[color:var(--color-text)]"
+                className="inline-flex items-center gap-[0.5cqw] font-[family-name:var(--font-sans)] font-medium text-[color:var(--color-ink)]"
                 style={{ padding: '0 0.7cqw', fontSize: '1.25cqw' }}
               >
                 <motion.span
-                  className="rounded-full bg-[color:var(--color-accent)]"
+                  className="rounded-full bg-[color:var(--color-brand)]"
                   style={{ width: '0.7cqw', height: '0.7cqw' }}
                   animate={
                     active
                       ? {
                           boxShadow: [
-                            '0 0 0 0.3cqw color-mix(in oklab, var(--color-accent) 18%, transparent)',
-                            '0 0 0 0.55cqw color-mix(in oklab, var(--color-accent) 6%, transparent)',
-                            '0 0 0 0.3cqw color-mix(in oklab, var(--color-accent) 18%, transparent)',
+                            '0 0 0 0.3cqw color-mix(in oklab, var(--color-brand) 18%, transparent)',
+                            '0 0 0 0.55cqw color-mix(in oklab, var(--color-brand) 6%, transparent)',
+                            '0 0 0 0.3cqw color-mix(in oklab, var(--color-brand) 18%, transparent)',
                           ],
                         }
                       : {
                           boxShadow:
-                            '0 0 0 0.3cqw color-mix(in oklab, var(--color-accent) 18%, transparent)',
+                            '0 0 0 0.3cqw color-mix(in oklab, var(--color-brand) 18%, transparent)',
                         }
                   }
                   transition={
@@ -514,13 +505,13 @@ function VisualEditorVisual() {
                 <span>1 unsaved change</span>
               </span>
               <span
-                className="font-[family-name:var(--font-sans)] text-[color:var(--color-muted)]"
+                className="font-[family-name:var(--font-sans)] text-[color:var(--color-body)]"
                 style={{ fontSize: '1.2cqw', padding: '0.4cqw 0.8cqw' }}
               >
                 Discard
               </span>
               <span
-                className="inline-flex items-center gap-[0.4cqw] font-[family-name:var(--font-sans)] font-medium text-[color:var(--color-brand-foreground,white)] rounded-[4px] bg-[color:var(--color-accent)]"
+                className="inline-flex items-center gap-[0.4cqw] font-[family-name:var(--font-sans)] font-medium text-[color:var(--color-brand-foreground,white)] rounded-[4px] bg-[color:var(--color-brand)]"
                 style={{ fontSize: '1.2cqw', padding: '0.45cqw 0.9cqw' }}
               >
                 <SaveGlyph />
@@ -531,32 +522,32 @@ function VisualEditorVisual() {
         </div>
 
         {/* InspectorPanel */}
-        <div className="border-l border-[color:var(--color-rule)] bg-[color:var(--color-panel-hi)] flex flex-col overflow-hidden">
+        <div className="border-l border-[color:var(--color-hairline)] bg-[color:var(--color-surface)] flex flex-col overflow-hidden">
           {/* header */}
           <div
-            className="border-b border-[color:var(--color-rule)] flex items-center justify-between"
+            className="border-b border-[color:var(--color-hairline)] flex items-center justify-between"
             style={{ padding: '1.4cqw 1.6cqw' }}
           >
             <div className="flex items-center gap-[0.6cqw]">
               <span
-                className="font-[family-name:var(--font-sans)] font-semibold tracking-tight text-[color:var(--color-text)]"
+                className="font-[family-name:var(--font-sans)] font-medium tracking-tight text-[color:var(--color-ink)]"
                 style={{ fontSize: '1.25cqw' }}
               >
                 Inspect
               </span>
               <span
                 aria-hidden
-                className="bg-[color:var(--color-rule)]"
+                className="bg-[color:var(--color-hairline)]"
                 style={{ width: '1px', height: '1.4cqw' }}
               />
               <span
-                className="rounded-[3px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel)] font-[family-name:var(--font-mono)] text-[color:var(--color-text)]"
+                className="rounded-[3px] border border-[color:var(--color-hairline)] bg-[color:var(--color-canvas)] font-[family-name:var(--font-mono)] text-[color:var(--color-ink)]"
                 style={{ padding: '0.1cqw 0.5cqw', fontSize: '1cqw' }}
               >
                 &lt;h1&gt;
               </span>
             </div>
-            <span className="text-[color:var(--color-dim)]">✕</span>
+            <span className="text-[color:var(--color-mute)]">✕</span>
           </div>
 
           <PanelSection label="Content">
@@ -567,13 +558,13 @@ function VisualEditorVisual() {
 
           <PanelSection label="Typography">
             <PanelRow label="Size">
-              <div className="flex-1 h-[0.5cqw] rounded-full bg-[color:var(--color-panel)] relative">
+              <div className="flex-1 h-[0.5cqw] rounded-full bg-[color:var(--color-canvas)] relative">
                 <motion.div
-                  className="absolute left-0 top-0 bottom-0 rounded-full bg-[color:var(--color-accent)]"
+                  className="absolute left-0 top-0 bottom-0 rounded-full bg-[color:var(--color-brand)]"
                   style={{ width: barWidth }}
                 />
                 <motion.div
-                  className="absolute top-1/2 -translate-y-1/2 rounded-full bg-[color:var(--color-text)] border border-[color:var(--color-accent)]"
+                  className="absolute top-1/2 -translate-y-1/2 rounded-full bg-[color:var(--color-ink)] border border-[color:var(--color-brand)]"
                   style={{
                     width: '1.1cqw',
                     height: '1.1cqw',
@@ -582,7 +573,7 @@ function VisualEditorVisual() {
                 />
               </div>
               <motion.span
-                className="flex-1 rounded-[4px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel)] text-[color:var(--color-text)] font-[family-name:var(--font-mono)]"
+                className="flex-1 rounded-[4px] border border-[color:var(--color-hairline)] bg-[color:var(--color-canvas)] text-[color:var(--color-ink)] font-[family-name:var(--font-mono)]"
                 style={{ fontSize: '1.05cqw', padding: '0.4cqw 0.6cqw' }}
               >
                 {sizeLabel}
@@ -603,7 +594,7 @@ function VisualEditorVisual() {
 
           <PanelSection label="Color">
             <PanelRow label="Text">
-              <PanelSwatch color="var(--color-accent)" />
+              <PanelSwatch color="var(--color-brand)" />
               <PanelInput value="#D56B48" mono uppercase />
             </PanelRow>
           </PanelSection>
@@ -617,7 +608,7 @@ function PanelSection({ label, children }: { label: string; children: ReactNode 
   return (
     <div className="flex flex-col gap-[0.9cqw]" style={{ padding: '1.2cqw 1.6cqw' }}>
       <span
-        className="font-[family-name:var(--font-sans)] font-medium text-[color:var(--color-text-soft)]"
+        className="font-[family-name:var(--font-sans)] font-medium text-[color:var(--color-charcoal)]"
         style={{ fontSize: '1cqw' }}
       >
         {label}
@@ -628,14 +619,14 @@ function PanelSection({ label, children }: { label: string; children: ReactNode 
 }
 
 function PanelDivider() {
-  return <div className="h-px bg-[color:var(--color-rule)]" />;
+  return <div className="h-px bg-[color:var(--color-hairline)]" />;
 }
 
 function PanelRow({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="grid grid-cols-[34%_1fr] items-center gap-[0.7cqw]">
       <span
-        className="font-[family-name:var(--font-sans)] text-[color:var(--color-muted)]"
+        className="font-[family-name:var(--font-sans)] text-[color:var(--color-body)]"
         style={{ fontSize: '1.1cqw' }}
       >
         {label}
@@ -656,7 +647,7 @@ function PanelInput({
 }) {
   return (
     <span
-      className={`flex-1 rounded-[4px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel)] text-[color:var(--color-text)] ${
+      className={`flex-1 rounded-[4px] border border-[color:var(--color-hairline)] bg-[color:var(--color-canvas)] text-[color:var(--color-ink)] ${
         mono ? 'font-[family-name:var(--font-mono)]' : 'font-[family-name:var(--font-sans)]'
       } ${uppercase ? 'uppercase' : ''}`}
       style={{ fontSize: '1.05cqw', padding: '0.4cqw 0.6cqw' }}
@@ -669,11 +660,11 @@ function PanelInput({
 function PanelSelect({ value }: { value: string }) {
   return (
     <span
-      className="flex-1 inline-flex items-center justify-between rounded-[4px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel)] font-[family-name:var(--font-sans)] text-[color:var(--color-text)]"
+      className="flex-1 inline-flex items-center justify-between rounded-[4px] border border-[color:var(--color-hairline)] bg-[color:var(--color-canvas)] font-[family-name:var(--font-sans)] text-[color:var(--color-ink)]"
       style={{ fontSize: '1.05cqw', padding: '0.4cqw 0.6cqw' }}
     >
       <span>{value}</span>
-      <span className="text-[color:var(--color-muted)]" style={{ fontSize: '1cqw' }}>
+      <span className="text-[color:var(--color-body)]" style={{ fontSize: '1cqw' }}>
         ▾
       </span>
     </span>
@@ -685,8 +676,8 @@ function PanelToggle({ glyph, pressed = false }: { glyph: ReactNode; pressed?: b
     <span
       className={`inline-flex items-center justify-center rounded-[4px] border ${
         pressed
-          ? 'border-[color:var(--color-rule)] bg-[color:var(--color-panel)] text-[color:var(--color-text)]'
-          : 'border-[color:var(--color-rule)] bg-transparent text-[color:var(--color-muted)]'
+          ? 'border-[color:var(--color-hairline)] bg-[color:var(--color-canvas)] text-[color:var(--color-ink)]'
+          : 'border-[color:var(--color-hairline)] bg-transparent text-[color:var(--color-body)]'
       }`}
       style={{ width: '2.4cqw', height: '2.4cqw' }}
     >
@@ -698,7 +689,7 @@ function PanelToggle({ glyph, pressed = false }: { glyph: ReactNode; pressed?: b
 function PanelSwatch({ color }: { color: string }) {
   return (
     <span
-      className="inline-flex items-center justify-center rounded-[4px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel)]"
+      className="inline-flex items-center justify-center rounded-[4px] border border-[color:var(--color-hairline)] bg-[color:var(--color-canvas)]"
       style={{ width: '2.4cqw', height: '2.4cqw' }}
     >
       <span
@@ -716,7 +707,7 @@ function PanelSwatch({ color }: { color: string }) {
 function PanelTextarea({ value }: { value: string }) {
   return (
     <span
-      className="block rounded-[4px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel)] font-[family-name:var(--font-sans)] text-[color:var(--color-text)]"
+      className="block rounded-[4px] border border-[color:var(--color-hairline)] bg-[color:var(--color-canvas)] font-[family-name:var(--font-sans)] text-[color:var(--color-ink)]"
       style={{
         fontSize: '1.1cqw',
         padding: '0.7cqw 0.7cqw',
@@ -733,7 +724,7 @@ function SaveBarIconBtn({ glyph, dim = false }: { glyph: ReactNode; dim?: boolea
   return (
     <span
       className={`inline-flex items-center justify-center rounded-[4px] ${
-        dim ? 'text-[color:var(--color-dim)]' : 'text-[color:var(--color-muted)]'
+        dim ? 'text-[color:var(--color-mute)]' : 'text-[color:var(--color-body)]'
       }`}
       style={{ width: '2cqw', height: '2cqw' }}
     >

@@ -17,10 +17,10 @@ const steps: Step[] = [
     num: '01',
     kicker: 'scaffold',
     title: 'Spin up a workspace',
-    body: 'Creates the slide workspace. Every future deck you author lives inside it.',
+    body: 'Creates the workspace. Every deck, carousel, and thumbnail you make lives inside it.',
     code: {
       prompt: '$',
-      line: 'npx @open-slide/cli init my-deck',
+      line: 'npx @open-frame/cli init my-studio',
       tail: '✓ ready in 3s',
     },
   },
@@ -28,10 +28,10 @@ const steps: Step[] = [
     num: '02',
     kicker: 'author',
     title: 'Ask your agent',
-    body: 'Your agent drafts pages as arbitrary React components. You guide with prompts.',
+    body: 'Your agent drafts pages as React components, in whatever format you pick.',
     code: {
       prompt: '›',
-      line: '/create-slide for Q2 roadmap',
+      line: '/create-slide a launch carousel',
       tail: <AgentRow />,
     },
   },
@@ -58,9 +58,8 @@ function renderLine(line: string) {
     if (start > last) parts.push(line.slice(last, start));
     const cmd = match[0];
     parts.push(
-      <span key={`cmd-${start}`}>
-        <span className="text-[color:var(--color-accent)]">/</span>
-        <span className="text-[color:var(--color-accent-soft)]">{cmd.slice(1)}</span>
+      <span key={`cmd-${start}`} className="font-medium text-[color:var(--color-ink)]">
+        {cmd}
       </span>,
     );
     last = start + cmd.length;
@@ -82,7 +81,7 @@ function AgentRow() {
       {agents.map(([file, name]) => (
         <img key={file} src={`/assets/${file}`} alt={name} className={cls} />
       ))}
-      <span className="text-[10px] tracking-[0.1em] uppercase text-[color:var(--color-muted)]">
+      <span className="text-[12px] tracking-[0.08em] uppercase text-[color:var(--color-mute)]">
         ...
       </span>
     </span>
@@ -92,43 +91,36 @@ function AgentRow() {
 export function HowItWorks() {
   return (
     <section id="how-it-works" className="relative">
-      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-[color:var(--color-rule)]" />
-      <div className="mx-auto max-w-[1360px] px-5 sm:px-8 lg:px-12 py-20 sm:py-32 lg:py-40">
-        <h2 className="text-[32px] sm:text-[44px] lg:text-[64px] leading-[1.1] sm:leading-[1.05] tracking-[-0.03em] max-w-[820px] mb-14 sm:mb-20">
-          <span className="font-[family-name:var(--font-sans)] font-medium">Slides as code.</span>
-          <br />
-          <span className="font-[family-name:var(--font-display)] italic text-[color:var(--color-accent)]">
-            Crafted by agents.
-          </span>
+      <div className="mx-auto max-w-[1080px] px-5 sm:px-8 py-12 sm:py-16 lg:py-[88px]">
+        <h2 className="text-[24px] sm:text-[30px] font-medium leading-[1.2] mb-10 sm:mb-14">
+          Pages as code. Written by agents.
         </h2>
 
-        <ol className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[color:var(--color-rule)] border border-[color:var(--color-rule)] rounded-[6px] overflow-hidden">
+        <ol className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[color:var(--color-hairline)] border border-[color:var(--color-hairline)] rounded-[12px] overflow-hidden">
           {steps.map((s) => (
             <li
               key={s.num}
-              className="group relative p-8 sm:p-10 lg:p-12 bg-[color:var(--color-ink)] flex flex-col gap-7 transition-colors hover:bg-[color:var(--color-panel)]"
+              className="group relative p-6 sm:p-8 bg-[color:var(--color-canvas)] flex flex-col gap-6"
             >
-              <span className="font-[family-name:var(--font-mono)] text-[11px] tracking-[0.18em] uppercase text-[color:var(--color-muted)]">
+              <span className="font-[family-name:var(--font-mono)] text-[12px] tracking-[0.08em] uppercase text-[color:var(--color-mute)]">
                 {s.num} · {s.kicker}
               </span>
 
               <div>
-                <h3 className="text-[22px] sm:text-[26px] lg:text-[30px] font-medium tracking-[-0.025em] leading-[1.15]">
-                  {s.title}
-                </h3>
-                <p className="mt-4 text-[15px] leading-[1.65] text-[color:var(--color-text-soft)] max-w-[36ch]">
+                <h3 className="text-[20px] font-medium leading-[1.4]">{s.title}</h3>
+                <p className="mt-2 text-[14px] leading-[1.5] text-[color:var(--color-body)] max-w-[36ch]">
                   {s.body}
                 </p>
               </div>
 
-              <div className="rounded-[6px] border border-[color:var(--color-rule)] bg-[color:var(--color-panel-hi)] p-4 font-[family-name:var(--font-mono)] text-[13px]">
+              <div className="mt-auto rounded-[8px] bg-[color:var(--color-surface)] p-4 font-[family-name:var(--font-mono)] text-[13px]">
                 <div className="flex items-center gap-2">
-                  <span className="text-[color:var(--color-accent)]">{s.code.prompt}</span>
-                  <span className="text-[color:var(--color-text)] truncate">
+                  <span className="text-[color:var(--color-mute)]">{s.code.prompt}</span>
+                  <span className="text-[color:var(--color-ink)] truncate">
                     {renderLine(s.code.line)}
                   </span>
                 </div>
-                <div className="mt-3 text-[11px] tracking-[0.1em] uppercase text-[color:var(--color-muted)]">
+                <div className="mt-3 text-[12px] tracking-[0.08em] uppercase text-[color:var(--color-mute)]">
                   {s.code.tail}
                 </div>
               </div>

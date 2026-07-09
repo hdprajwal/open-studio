@@ -1,0 +1,100 @@
+import {
+  Clapperboard,
+  GitBranch,
+  GraduationCap,
+  type LucideIcon,
+  Megaphone,
+  Presentation,
+  Users,
+} from 'lucide-react';
+import Link from 'next/link';
+
+type Audience = {
+  icon: LucideIcon;
+  title: string;
+  items: string[];
+};
+
+const audiences: Audience[] = [
+  {
+    icon: Presentation,
+    title: 'Speakers',
+    items: ['Conference talks', 'Meetup decks', 'Workshop slides'],
+  },
+  {
+    icon: Clapperboard,
+    title: 'Creators',
+    items: ['YouTube thumbnails', 'LinkedIn carousels', 'Instagram stories'],
+  },
+  {
+    icon: GitBranch,
+    title: 'Developers',
+    items: [
+      'Decks versioned in your repo',
+      'Slides reviewed in pull requests',
+      'Themes shared as components',
+    ],
+  },
+  {
+    icon: Megaphone,
+    title: 'Marketers',
+    items: ['Launch carousels', 'X post images', 'OG images for link previews'],
+  },
+  {
+    icon: GraduationCap,
+    title: 'Educators',
+    items: ['Lecture slides', 'PDF handouts to share', 'Reusable course decks'],
+  },
+  {
+    icon: Users,
+    title: 'Teams',
+    items: [
+      'One workspace for every format',
+      'A consistent brand, in code',
+      'Static sites anyone can host',
+    ],
+  },
+];
+
+export function Audiences() {
+  return (
+    <section id="audiences" className="relative">
+      <div className="mx-auto max-w-[1080px] px-5 sm:px-8 py-12 sm:py-16 lg:py-[88px]">
+        <h2 className="text-[24px] sm:text-[30px] font-medium leading-[1.2] mb-2">
+          Designed for you
+        </h2>
+        <p className="max-w-[560px] text-[16px] leading-[1.5] text-[color:var(--color-body)] mb-10 sm:mb-14">
+          Start from a prompt, or open the demo workspace and make it yours.
+        </p>
+
+        <div className="rounded-[12px] border border-[color:var(--color-hairline)] bg-[color:var(--color-canvas)] p-6 sm:p-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+            {audiences.map((a) => (
+              <div key={a.title}>
+                <a.icon aria-hidden className="size-5 text-[color:var(--color-ink)]" />
+                <h3 className="mt-3 text-[16px] font-medium leading-[1.5]">{a.title}</h3>
+                <ul className="mt-1.5 flex flex-col gap-1.5">
+                  {a.items.map((item) => (
+                    <li
+                      key={item}
+                      className="text-[14px] leading-[1.43] text-[color:var(--color-body)]"
+                    >
+                      · {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <Link
+            href="/docs"
+            className="mt-10 inline-flex items-center h-9 rounded-[8px] bg-[color:var(--color-primary)] px-5 text-[14px] font-medium text-[color:var(--color-on-primary)] hover:bg-[color:var(--color-ink-deep)] transition-colors"
+          >
+            Get started
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}

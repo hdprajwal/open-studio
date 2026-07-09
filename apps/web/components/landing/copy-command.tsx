@@ -17,35 +17,30 @@ export function CopyCommand({ command, size = 'lg' }: { command: string; size?: 
     }
   };
 
-  const height = size === 'lg' ? 'h-[48px] sm:h-[52px]' : 'h-10';
-  const pad = size === 'lg' ? 'px-4 sm:px-5' : 'px-4';
-  const text = size === 'lg' ? 'text-[13px] sm:text-[15px]' : 'text-[13px]';
+  const height = size === 'lg' ? 'h-12' : 'h-10';
+  const pad = size === 'lg' ? 'px-5' : 'px-4';
+  const text = size === 'lg' ? 'text-[14px] sm:text-[16px]' : 'text-[14px]';
 
   return (
     <button
       type="button"
       onClick={onCopy}
-      style={{
-        boxShadow:
-          '0 0 0 1px color-mix(in oklab, var(--color-accent) 15%, transparent), 0 20px 80px -20px color-mix(in oklab, var(--color-accent) 35%, transparent)',
-      }}
-      className={`group relative inline-flex items-center gap-3 ${height} ${pad} rounded-[6px] border border-[color:var(--color-accent)]/40 bg-[color:var(--color-panel)] text-[color:var(--color-text)] font-[family-name:var(--font-mono)] ${text} hover:border-[color:var(--color-accent)] transition`}
+      className={`group inline-flex items-center gap-3 ${height} ${pad} rounded-[8px] bg-[color:var(--color-surface)] text-[color:var(--color-ink)] font-[family-name:var(--font-mono)] ${text} hover:bg-[color:var(--color-hairline)]/60 transition-colors`}
     >
-      <span aria-hidden className="text-[color:var(--color-accent)]">
+      <span aria-hidden className="text-[color:var(--color-mute)]">
         $
       </span>
-      <span className="tracking-[-0.01em]">{command}</span>
+      <span>{command}</span>
       <span
         aria-hidden
-        className="ml-1 inline-flex items-center gap-1.5 text-[color:var(--color-muted)] group-hover:text-[color:var(--color-accent)] transition-colors"
+        className="ml-1 inline-flex items-center text-[color:var(--color-body)] group-hover:text-[color:var(--color-ink)] transition-colors"
       >
-        <span className="h-4 w-px bg-[color:var(--color-rule)]" />
         <span className="relative inline-flex h-[14px] w-[14px] items-center justify-center">
           <CopyGlyph
             className={`absolute inset-0 transition-opacity duration-200 ${copied ? 'opacity-0' : 'opacity-100'}`}
           />
           <CheckGlyph
-            className={`absolute inset-0 text-[color:var(--color-mint)] transition-opacity duration-200 ${copied ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute inset-0 text-[color:var(--color-ink)] transition-opacity duration-200 ${copied ? 'opacity-100' : 'opacity-0'}`}
           />
         </span>
       </span>

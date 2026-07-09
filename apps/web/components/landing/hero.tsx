@@ -3,37 +3,21 @@ import { HeroDocsLink } from './hero-docs-link';
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      <div aria-hidden className="hair absolute inset-x-0 top-0" />
-
-      <div className="relative mx-auto max-w-[1360px] px-5 sm:px-8 lg:px-12 pt-20 sm:pt-32 lg:pt-44 pb-20 sm:pb-32">
-        <div className="flex flex-col gap-10 sm:gap-14 max-w-[920px]">
-          <h1
-            className="text-[44px] sm:text-[72px] lg:text-[100px] leading-[1.05] sm:leading-[0.98] tracking-[-0.035em] rise"
-            style={{ animationDelay: '80ms' }}
-          >
-            <span className="font-[family-name:var(--font-sans)] font-medium text-[color:var(--color-text)]">
-              The slide framework
-            </span>
-            <br />
-            <span className="font-[family-name:var(--font-display)] italic text-[color:var(--color-paper)]">
-              built for <span className="text-[color:var(--color-accent)]">agents</span>.
-            </span>
+    <section className="relative">
+      <div className="mx-auto max-w-4xl px-5 sm:px-8 pt-16 sm:pt-24 lg:pt-28 pb-12 sm:pb-[88px]">
+        <div className="flex flex-col items-center text-center gap-6">
+          <h1 className="text-[28px] sm:text-[36px] font-medium leading-[1.11]">
+            The content studio built for agents.
           </h1>
 
-          <p
-            className="max-w-[600px] text-[18px] sm:text-[20px] leading-[1.6] text-[color:var(--color-text-soft)] rise"
-            style={{ animationDelay: '200ms' }}
-          >
-            A React-first slide framework. Every page is arbitrary code on a 1920×1080 canvas. No
-            layout to fight. Design anything you can imagine.
+          <p className="max-w-xl text-[16px] leading-[1.5] text-[color:var(--color-body)]">
+            Slides, LinkedIn carousels, stories, thumbnails, and OG images from one workspace. Every
+            page is a React component on a canvas sized for its format. You describe it, your agent
+            writes it.
           </p>
 
-          <div
-            className="flex flex-wrap items-center gap-x-6 gap-y-4 rise"
-            style={{ animationDelay: '320ms' }}
-          >
-            <CopyCommand command="npx @open-slide/cli init" />
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-4">
+            <CopyCommand command="npx @open-frame/cli init" />
             <HeroDocsLink />
           </div>
         </div>
